@@ -23,7 +23,7 @@ export class AppComponent {
   setName() {
     var self = this;
     this.nameSet = true;
-    this.client = new WebSocket('ws://141.135.194.152:8001');
+    this.client = new WebSocket('wss://141.135.194.152:8001');
     this.client.onopen = function() {
       self.client.send(self.createNewUser());
     }
