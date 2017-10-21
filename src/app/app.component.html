@@ -1,0 +1,20 @@
+<h1>Name : {{name}}</h1>
+  <div *ngIf="nameSet">
+    <textarea id="chatBox" [(ngModel)]="history" style="width: 50em; height: 30em;" disabled=true></textarea>
+    <form (ngSubmit)="sendMessage()">
+      <input name="message" type="text" [(ngModel)]="message"/>
+      <button type="submit">Send</button>
+    </form>
+    <ul>
+      <li *ngFor="let user of users">
+        <span>{{user}}</span>
+        <span> is connected.</span>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="!nameSet">
+    <form (ngSubmit)="setName()">
+      <input name="name" type="text" [(ngModel)]="name" />
+      <button type="submit">Set name</button>
+    </form>
+  </div>
