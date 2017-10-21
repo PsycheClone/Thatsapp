@@ -7,8 +7,8 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
     let parsedMessage = JSON.parse(message);
     if(parsedMessage.newUser) {
-      console.log(parsedMessage.newUser + ' connected.  Total: ' + wss.clients.length + ' users.');
       clients.set(ws, parsedMessage.newUser);
+      console.log(parsedMessage.newUser + ' connected.  Total: ' + wss.clients.length + ' users.');
       notifyUsers();
     } else {
       console.log(clients.get(ws) + ' sent: %s', message);

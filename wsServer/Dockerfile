@@ -5,5 +5,7 @@ WORKDIR /usr/src/app
 
 COPY wss.js .
 
-EXPOSE 8080
+RUN npm install ws
+
+EXPOSE 8001
 CMD [ "node", "wss.js" ]
