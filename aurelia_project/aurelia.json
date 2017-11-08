@@ -1,5 +1,5 @@
 {
-  "name": "copyThatsapp",
+  "name": "Thatsapp",
   "type": "project:application",
   "platform": {
     "id": "web",
@@ -91,6 +91,7 @@
         "name": "vendor-bundle.js",
         "prepend": [
           "node_modules/bluebird/js/browser/bluebird.core.js",
+          "node_modules/popper.js/dist/umd/popper.min.js",
           "node_modules/requirejs/require.js"
         ],
         "dependencies": [
@@ -131,6 +132,21 @@
             "path": "../node_modules/aurelia-testing/dist/amd",
             "main": "aurelia-testing",
             "env": "dev"
+          },
+          "jquery",
+          "tether",
+          {
+            "name": "bootstrap",
+            "path": "../node_modules/bootstrap/dist",
+            "main": "js/bootstrap.min",
+            "deps": [
+              "jquery",
+              "tether"
+            ],
+            "exports": "$",
+            "resources": [
+              "css/bootstrap.css"
+            ]
           }
         ]
       }

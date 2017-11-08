@@ -1,0 +1,52 @@
+<template>
+  <require from="bootstrap/css/bootstrap.css"></require>
+  <require from="./message"></require>
+  <require from="./user"></require>
+
+  <div show.bind="nameSet" class="container">
+    <h1>${name}</h1>
+    <div class="row">
+      <div show.bind="nameSet" class="container col-md-10">
+        <div id="chat-container" class="bg-success d-flex flex-column pre-scrollable" style="height: 300px; padding: 10px;">
+          <div class="mt-auto">
+            <div class="row" repeat.for="message of messages">
+              <div if.bind="message.otheruser" class="col"></div>
+              <message if.bind="message.otheruser" class="col" message.bind="message"></message>
+              <!--separate-->
+              <message if.bind="!message.otheruser" class="col" message.bind="message"></message>
+              <div if.bind="!message.otheruser" class="col"></div>
+            </div>
+          </div>
+        </div>
+        <form submit.delegate="sendMessage()">
+          <div class="w-100 justify-content-md-center">
+            <div class="input-group" style="height: 50px;">
+              <input name="message" type="text" value.bind="message" class="form-control text-left"
+                     placeholder="type here">
+              <span class="input-group-btn">
+              <button class="btn btn-success" type="submit">Send</button>
+            </span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2" style="height: 300px;">
+        <div class="list-group">
+          <user repeat.for="user of users" user.bind="user"></user>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div show.bind="!nameSet" class="container">
+    <form submit.delegate="setName()">
+      <div class="input-group" style="height: 50px;">
+        <input name="name" type="text" value.bind="name" class="form-control text-left"
+               placeholder="name here">
+        <span class="input-group-btn">
+              <button class="btn btn-success" type="submit">Go!</button>
+            </span>
+      </div>
+    </form>
+  </div>
+</template>

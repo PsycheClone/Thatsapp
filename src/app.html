@@ -1,22 +1,3 @@
 <template>
-  <h1>${name} joow</h1>
-  <div *ngIf="nameSet">
-    <textarea id="chatBox" value.bind="history" style="width: 50em; height: 30em;" disabled=true></textarea>
-    <form submit.delegate="sendMessage()">
-      <input name="message" type="text" value.bind="message"/>
-      <button type="submit">Send</button>
-    </form>
-    <ul>
-      <li repeat.for="user of users">
-        <span>${user.name}</span>
-        <span> is connected.</span>
-      </li>
-    </ul>
-  </div>
-  <div>
-    <form submit.delegate="setName()">
-      <input name="name" type="text" value.bind="name" />
-      <button type="submit">Set name</button>
-    </form>
-  </div>
+  <router-view></router-view>
 </template>
