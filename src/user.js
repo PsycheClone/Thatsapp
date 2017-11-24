@@ -1,17 +1,15 @@
 import {inject} from 'aurelia-framework';
 import {bindable, bindingMode} from 'aurelia-framework';
+import {AuthService} from 'aurelia-authentication';
 import { Router } from 'aurelia-router';
 
-@inject(Router)
+@inject(Router, AuthService)
 export class UserCustomElement {
   @bindable({ defaultBindingMode: bindingMode.twoWay }) user;
 
-  constructor(router) {
+  constructor(router, authService) {
     this.router = router;
     this.status = "connected"
-  }
-
-  startConversation() {
-    this.router.navigateToRoute('justatest', {id: 456})
+    this.authService = authService;
   }
 }

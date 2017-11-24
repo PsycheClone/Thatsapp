@@ -116,6 +116,25 @@
           "aurelia-task-queue",
           "aurelia-templating",
           "aurelia-templating-binding",
+          "aurelia-api",
+          "aurelia-fetch-client",
+          "aurelia-http-client",
+          "extend",
+          {
+            "name": "aurelia-authentication",
+            "path": "../node_modules/aurelia-authentication/dist/amd",
+            "main": "aurelia-authentication"
+          },
+          {
+            "name": "jwt-decode",
+            "path": "../node_modules/jwt-decode/lib",
+            "main": "index"
+          },
+          {
+            "name": "aurelia-plugins-jwt-decode",
+            "path": "../node_modules/aurelia-plugins-jwt-decode/dist/amd",
+            "main": "aurelia-plugins-jwt-decode"
+          },
           "text",
           {
             "name": "aurelia-templating-resources",
