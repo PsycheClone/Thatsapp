@@ -1,6 +1,6 @@
 <template>
-  <div class="list-group-item flex-column justify-content-between">
-    <h3 class="text-muted mr-auto">${user.name}</h3>
-    <small class="text-muted ml-auto">${status}</small>
+  <div click.delegate="selectContact()" class="${selectedContact.nickname == user.nickname? 'bg-faded' : ''} list-group-item flex-column justify-content-between">
+    <h3 class="text-muted mr-auto">${user.nickname}</h3>
+    <small class="${user.status == 'online'? 'text-success' : 'text-danger'} ml-auto">${user.status}</small>
   </div>
 </template>

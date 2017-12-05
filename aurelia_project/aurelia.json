@@ -126,6 +126,11 @@
             "main": "aurelia-authentication"
           },
           {
+            "name": "aurelia-dialog",
+            "path": "../node_modules/aurelia-dialog/dist/amd",
+            "main": "aurelia-dialog"
+          },
+          {
             "name": "jwt-decode",
             "path": "../node_modules/jwt-decode/lib",
             "main": "index"

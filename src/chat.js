@@ -1,53 +1,78 @@
 import {AuthService} from 'aurelia-authentication';
+import {DialogService} from 'aurelia-dialog';
 import {inject} from 'aurelia-framework';
 import {JwtDecode} from 'aurelia-plugins-jwt-decode';
+import {HttpService} from './httpService';
+import {AddContact} from './addContact';
+import environment from './environment'
 
-@inject(AuthService)
+@inject(AuthService, DialogService, HttpService)
 export class ChatComponent {
   message = '';
   messages = [];
   users = [];
   name = '';
-  nameSet = true;
+  selectedContact = '';
   client;
 
-  constructor(authService) {
+  constructor(authService, dialogService, httpService) {
     this.authService = authService;
+    this.dialogService = dialogService;
+    this.httpService = httpService;
   }
 
   attached() {
     this.user = JwtDecode.decode(this.authService.authentication.accessToken);
-    var self = this;
-    this.client = new WebSocket('ws://localhost:8001')
+    let self = this;
+    this.client = new WebSocket(environment.websocketUrl);
     this.client.onopen = function() {
-      self.client.send(self.createNewUser());
+      self.client.send(JSON.stringify({"connect": self.authService.authentication.accessToken}));
     }
     this.client.onmessage = function incoming(message) {
       let parsed = JSON.parse(message.data);
       if(parsed.clientNames) {
         console.log(parsed);
-        self.users = parsed.clientNames;
+        // self.users = parsed.clientNames;
       } else {
-        self.messages.push({ otheruser: function() { return self.name === parsed.name }(), corresponder: parsed.name, message: parsed.message });
+        console.log(parsed);
+        self.messages.push({
+          otheruser: function() { return self.name === parsed.nickname }(),
+          corresponder: parsed.nickname,
+          message: parsed.message,
+          timestamp: parsed.timestamp,
+          error: parsed.error
+        });
       }
     }
+
+    this.httpService.getContact(this.user.user_id)
+      .then(response => {
+        self.users = JSON.parse(response.response);
+        console.log(self.users);
+      })
   }
 
   sendMessage() {
-    this.client.send(this.createMessage())
+    this.client.send(this.createMessage());
     this.message = '';
-  }
-
-  createNewUser() {
-    return JSON.stringify({
-      "newUser": this.user.nickname
-    });
   }
 
   createMessage() {
     return JSON.stringify({
-      "name": this.user.nickname,
+      "sender": this.user.nickname,
+      "addressee": this.selectedContact.nickname,
       "message": this.message
+    });
+  }
+
+  addContact() {
+    this.dialogService.open({ viewModel: AddContact, model: this.user, lock: false }).whenClosed(response => {
+      if (!response.wasCancelled) {
+        console.log('good');
+      } else {
+        console.log('bad');
+      }
+      console.log(response.output);
     });
   }
 

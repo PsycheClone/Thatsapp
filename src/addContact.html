@@ -1,0 +1,8 @@
+<template>
+  <div class="list-group mt-4">
+    <div click.delegate="add(user)" repeat.for="user of users" class="list-group-item flex-column justify-content-between">
+      <h3 class="text-muted mr-auto">${user.nickname}</h3>
+      <small class="${user.status == 'online'? 'text-success' : 'text-danger'} ml-auto">${user.status}</small>
+    </div>
+  </div>
+</template>

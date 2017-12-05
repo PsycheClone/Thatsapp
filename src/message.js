@@ -11,8 +11,13 @@ export class MessageCustomElement {
   }
 
   attached() {
+    console.log(this.message.error !== "none");
     this.taskQueue.queueMicroTask(() => {
       $('#chat-container').scrollTop($('#chat-container')[0].scrollHeight)
     });
+  }
+
+  isError() {
+    return this.message.error !== "none";
   }
 }

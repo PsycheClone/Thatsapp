@@ -11,6 +11,7 @@
     "aurelia-animator-css": "^1.0.0",
     "aurelia-authentication": "^3.7.0",
     "aurelia-bootstrapper": "^1.0.0",
+    "aurelia-dialog": "^1.0.0-rc.2.0.0",
     "aurelia-http-client": "^1.2.1",
     "aurelia-plugins-jwt-decode": "^2.5.1",
     "bluebird": "^3.4.1",

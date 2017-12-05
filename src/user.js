@@ -6,10 +6,15 @@ import { Router } from 'aurelia-router';
 @inject(Router, AuthService)
 export class UserCustomElement {
   @bindable({ defaultBindingMode: bindingMode.twoWay }) user;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) selectedContact;
 
   constructor(router, authService) {
     this.router = router;
-    this.status = "connected"
     this.authService = authService;
+  }
+
+  selectContact() {
+    this.selectedContact = this.user;
+    console.log(this.selectedContact);
   }
 }
